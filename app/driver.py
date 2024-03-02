@@ -17,6 +17,7 @@ from kivy.uix.screenmanager import (ScreenManager,
                                     FadeTransition)
 # Screens
 from screens import (splash,
+                     login,
                      home)
 # YAML Reading
 import yaml
@@ -43,10 +44,12 @@ class Run(App):
         self.icon = "app/assets/splash/logo_w.png"
         self.title = "RE:Society"
         self.splash = splash.Splash(name="Splash Screen")
-        self.home = home.Home(name="Home Page")
+        self.login = login.Login(name="Login Page")
+        # self.home = home.Home(name="Home Page")
         screens = [
-                    # self.splash,
-                    self.home,
+                    self.splash,
+                    self.login,
+                    # self.home,
                     ]
         for screen in screens:
             self.screen_manager.add_widget(screen)
