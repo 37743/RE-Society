@@ -1,3 +1,5 @@
+# Circular Loading Bar
+# ---
 from kivy import utils
 from kivy.uix.progressbar import ProgressBar
 from kivy.core.text import Label as CoreLabel

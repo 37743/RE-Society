@@ -1,5 +1,3 @@
-# Egypt-Japan University of Science and Technology
-# Attention - Team E-JUSTians
 # Splash Screen
 # ---
 from kivy.app import App

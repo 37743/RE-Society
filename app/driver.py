@@ -43,10 +43,10 @@ class Run(App):
         self.icon = "app/assets/splash/logo_w.png"
         self.title = "RE:Society"
         self.splash = splash.Splash(name="Splash Screen")
-        # self.home = home.Home(name="Home Page")
+        self.home = home.Home(name="Home Page")
         screens = [
-                    self.splash,
-                    # self.home,
+                    # self.splash,
+                    self.home,
                     ]
         for screen in screens:
             self.screen_manager.add_widget(screen)
