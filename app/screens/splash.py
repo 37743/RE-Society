@@ -63,7 +63,7 @@ class Splash(Screen, FloatLayout):
             # self._update_pct(prog_pct)
             self.progress_bar.set_value(prog_pct)
             if (prog_pct == 100):
-                Clock.schedule_once(lambda dt: change_to_screen(screen="Login Page"), 3)
+                Clock.schedule_once(lambda dt: change_to_screen(screen="Home Page"), 3)
                 break
 
     def _login_thread(self, instance):
