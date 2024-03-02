@@ -63,7 +63,7 @@ class Splash(Screen, FloatLayout):
             # self._update_pct(prog_pct)
             self.progress_bar.set_value(prog_pct)
             if (prog_pct == 100):
-                Clock.schedule_once(lambda dt: change_to_screen(screen="Login Page"), 3)
+                Clock.schedule_once(lambda dt: change_to_screen(screen="Login Page"), 1)
                 break
 
     def _login_thread(self, instance):
@@ -83,7 +83,7 @@ class Splash(Screen, FloatLayout):
         LabelBase.register(name='Antonio', fn_regular=ANTONIO)
         self.logobutton = Button(size_hint=(None,None),
                                  size=(178,153),
-                                 pos_hint={"center_x": .5, "center_y": .5},
+                                 pos_hint={"center_x": .5, "center_y": .55},
                                  background_normal="app/assets/splash/logo_w.png",
                                  background_disabled_normal="app/assets/splash/logo_w.png",
                                  background_down="app/assets/splash/logo_w.png")

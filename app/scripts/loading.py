@@ -42,7 +42,7 @@ class CircularProgressBar(ProgressBar):
             
     @mainthread
     def draw(self):
-        gray = utils.get_color_from_hex('#707070')[:3]
+        # gray = utils.get_color_from_hex('#707070')[:3]
         white = utils.get_color_from_hex('#fafafa')[:3]
         blue = utils.get_color_from_hex('#0069aa')[:3]
         with self.canvas:
