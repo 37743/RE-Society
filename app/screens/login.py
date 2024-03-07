@@ -14,6 +14,9 @@ from kivy.clock import (mainthread,
                         Clock)
 from kivy.animation import Animation
 import threading
+# MariaDB Connector
+import mysql.connector
+from screens import home
 
 ADAM = "app/assets/fonts/Antonio-VariableFont_wght.ttf"
 ANTONIO = "app/assets/fonts/ADAM.CG PRO.otf"
@@ -31,10 +34,28 @@ class Login(Screen, FloatLayout):
         self.bg.pos = instance.pos
         self.bg.size = instance.size
 
-    def _login_thread(self, instance):
-        ''' Start loading up the program, including database connection'''
-        login_thread = threading.Thread(target=self._load_program)
-        login_thread.start()
+    def _login_released(self, instance):
+        ''' Connects to database and verifies the input credentials'''
+        try:
+            app = App.get_running_app()
+            db_cred = app.db_cred
+            cn = mysql.connector.connect(
+                            user=db_cred['user'],
+                            password=db_cred['password'],
+                            host=db_cred['host'],
+                            database=db_cred['database'])
+            cr = cn.cursor()
+            u, p= str(self.user_box.text), str(self.pass_box.text)
+            cr.execute(f"SELECT verify_login(\'{u}\',\'{p}\') AS verify_login")
+            if cr.fetchall()[0][0] == 1:
+                self.login_result.text=f"Welcome, {u}!"
+                app.user = u
+                app.home = home.Home(name="Home Page")
+                app.screen_manager.add_widget(app.home)
+                Clock.schedule_once(lambda dt: change_to_screen(screen="Home Page"), 2)
+            cn.close()
+        except mysql.connector.Error as e:
+            print(f"{e}")
 
     def __init__(self, **kwargs):
         ''' Sets up UI elements and registering fonts'''
@@ -120,6 +141,7 @@ class Login(Screen, FloatLayout):
                                 "app/assets/login/login_btn.png",
                                 background_down=
                                 "app/assets/login/login_btn.png")
+        self.login_button.bind(on_release=self._login_released)
         self.add_widget(self.login_button)
         #endregion
         self.footer = Label(text="RE:Society is a comprehensive application aimed at reintegrating ex-convicts into society by providing them with job opportunities and mentorship.",
