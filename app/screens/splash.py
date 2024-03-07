@@ -42,6 +42,8 @@ class Splash(Screen, FloatLayout):
         ''' Simulates a loading process with a placeholder time delay
         Triggers on button release, starting an animation and changing
         the screen after a delay'''
+        if self.logobutton.disabled:
+            return
         self.logobutton.disabled = True
         start_time = time.time()
         end_time = start_time + 4  # 4 seconds
@@ -63,7 +65,7 @@ class Splash(Screen, FloatLayout):
             # self._update_pct(prog_pct)
             self.progress_bar.set_value(prog_pct)
             if (prog_pct == 100):
-                Clock.schedule_once(lambda dt: change_to_screen(screen="Home Page"), 3)
+                Clock.schedule_once(lambda dt: change_to_screen(screen="Login Page"), 1)
                 break
 
     def _login_thread(self, instance):
@@ -83,18 +85,18 @@ class Splash(Screen, FloatLayout):
         LabelBase.register(name='Antonio', fn_regular=ANTONIO)
         self.logobutton = Button(size_hint=(None,None),
                                  size=(178,153),
-                                 pos_hint={"center_x": .5, "center_y": .5},
-                                 background_normal="app/assets/splash/logo_w.png",
-                                 background_disabled_normal="app/assets/splash/logo_w.png",
+                                 pos_hint={"center_x": .5, "center_y": .55},
+                                 background_normal="app/assets/splash/logo_w2.png",
+                                 background_disabled_normal="app/assets/splash/logo_w2.png",
                                  background_down="app/assets/splash/logo_w.png")
         self.logobutton.bind(on_release=self._load_program,
                             #  on_press=click_sfx
                              )
-        self.loading_text = Label(text="Press to boot-up!",
+        self.loading_text = Label(text="Connecting to server..",
                                   font_name="Antonio",
                                   color="ffffff",
                                   font_size=22,
-                                  pos_hint={'center_x': .5, 'center_y': .3},
+                                  pos_hint={'center_x': .5, 'center_y': .4},
                                   halign='center')
         self.progress_bar = CircularProgressBar(max=100,
                                                 height=125,
@@ -110,3 +112,4 @@ class Splash(Screen, FloatLayout):
                              pos_hint={"center_x": .5, "center_y": .04},
                              font_size=11)
         self.add_widget(self.footer)
+        self.schedule_connection = Clock.schedule_once(self._load_program, 3)
