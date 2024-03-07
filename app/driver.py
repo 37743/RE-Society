@@ -60,7 +60,7 @@ class Run(App):
         pass
 
 if __name__ == '__main__':
-    # Window.maximize()
+    Window.maximize()
     # Window.fullscreen = 'auto'
     main = Run()
     main.run()

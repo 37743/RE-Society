@@ -48,7 +48,6 @@ class Login(Screen, FloatLayout):
             u, p= str(self.user_box.text), str(self.pass_box.text)
             cr.execute(f"SELECT verify_login(\'{u}\',\'{p}\') AS verify_login")
             if cr.fetchall()[0][0] == 1:
-                self.login_result.text=f"Welcome, {u}!"
                 app.user = u
                 app.home = home.Home(name="Home Page")
                 app.screen_manager.add_widget(app.home)
