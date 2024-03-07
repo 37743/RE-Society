@@ -21,12 +21,12 @@ from screens import (splash,
                      home)
 # YAML Reading
 import yaml
-from datetime import datetime
-
+# JSON Reading
+import json
+# Screeninfo
 from screeninfo import get_monitors
 for m in get_monitors():
     print(str(m))
-
 class Run(App):
     ''' Driver code for the application, contains a screen manager
     that controls which interface is shown to the user at a time.'''
@@ -38,8 +38,9 @@ class Run(App):
         Window.size = (self.config_data['window_size_x'], self.config_data['window_size_y'])
         # Window.left = int((1366-self.config_data['window_size_x'])/2)
         self.screen_manager = ScreenManager(transition = FadeTransition())
-
         self.db_cred = {}
+        with open("app/scripts/settings/sqlauth.json") as db_file:
+                self.db_cred = json.load(db_file)
         self.user = ""
         self.icon = "app/assets/splash/logo_w.png"
         self.title = "RE:Society"
