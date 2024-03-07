@@ -50,7 +50,7 @@ class Run(App):
         screens = [
                     self.splash,
                     self.login,
-                    # self.home,
+                    # self.home
                     ]
         for screen in screens:
             self.screen_manager.add_widget(screen)
@@ -60,7 +60,7 @@ class Run(App):
         pass
 
 if __name__ == '__main__':
-    Window.maximize()
+    # Window.maximize()
     # Window.fullscreen = 'auto'
     main = Run()
     main.run()
