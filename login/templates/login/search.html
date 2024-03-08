@@ -1,0 +1,20 @@
+<!-- worker_list.html -->
+<form method="get" action="{% url 'worker_list' %}">
+
+    <label for="skill">Select a Skill:</label>
+
+    <select name="skill_id" id="skill">
+
+        <option value="">All</option>
+        {% for skill in skills %}
+            <option value="{{ skill.id }}">{{ skill.name }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Filter</button>
+</form>
+
+{% for worker in workers %}
+    <!-- Display worker information as needed -->
+    <li><a href="{% url 'worker_detail' pk=worker.pk %}">{{ worker.full_name.split|first }}</a></li>
+{% endfor %}

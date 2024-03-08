@@ -1,0 +1,36 @@
+{% extends "base.html"%}
+
+{%block content%}
+
+<form method = 'POST'>
+    {% csrf_token %}
+    <label for="Username"> Username </label>
+    <input type="text" id = "Username" name = 'Username' placeholder="Enter Username" required>
+    <br>
+    <label for="Username"> First Name </label>
+    <input type="text" id = "fname" name = 'fname' placeholder="Enter you Fist name" required>
+    <br>
+    <label for="Username"> Last Name </label>
+    <input type="text" id = "lname" name = 'lname' placeholder="Enter you last name" required>
+    <br>
+    <label for="Username"> Email aaddress </label>
+    <input type="email" id = "email" name = 'email' placeholder="Enter you E-mail" required>
+    <br>
+    <label for="Username"> Password </label>
+    <input type="password" id = "pass1" name = 'pass1' placeholder="Type password" required>
+    <br>
+    <label for="Username"> Confirm your password </label>
+    <input type="password" id = "pass2" name = 'pass2' placeholder="Confirm Password" required>
+    <br>
+
+    <button class= 'btn btn-primary my-1' type = 'submit'> Sign up</button>
+</form>
+<a  class = 'btn btn-primary my-1' href ="{%url 'signIn' %}"> Already Have and Account? Login</a>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{%endblock%}

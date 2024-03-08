@@ -1,0 +1,24 @@
+{% extends "base.html"%}
+
+{%block content%}
+<form method = 'POST'>
+    {% csrf_token %}
+    <label for="Username"> Username </label>
+    <input type="text" id = "Username" name = 'Username' placeholder="Enter Username" required>
+    <br>
+    <label for="Username"> Password </label>
+    <input type="password" id = "pass1" name = 'pass1' placeholder="Type password" required>
+    <br>
+    <button class= 'btn btn-primary my-1' type = 'submit'> login in</button>
+    
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</form>
+{%endblock%}

@@ -1,0 +1,12 @@
+{%extends "base.html"%}
+{%block content %}
+    {% if user.is_authenticated %}
+        <h3>Hello {{ user.first_name }}</h3>
+    {% elif request.user.is_anonymous%}:
+        <h3>Welcome to our Website</h3>
+    {% endif %} 
+    <a href="{%url 'signup'%}" class = 'btn btn-secondary my-5'> sign Up</a>
+    <a href="{%url 'signIn'%}" class = 'btn btn-secondary my-5'> Log In</a>
+    <a href="{%url 'signout'%}" class = 'btn btn-secondary my-5'> Log Out</a>
+
+{%endblock%}
