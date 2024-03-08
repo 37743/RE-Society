@@ -12,8 +12,6 @@ from kivy.uix.label import Label
 from kivy.core.text import LabelBase
 from kivy.clock import (mainthread,
                         Clock)
-from kivy.animation import Animation
-import threading
 # MariaDB Connector
 import mysql.connector
 from screens import home
