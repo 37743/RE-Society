@@ -88,7 +88,7 @@ class Splash(Screen, FloatLayout):
                                  pos_hint={"center_x": .5, "center_y": .55},
                                  background_normal="app/assets/splash/logo_w2.png",
                                  background_disabled_normal="app/assets/splash/logo_w2.png",
-                                 background_down="app/assets/splash/logo_w.png")
+                                 background_down="app/assets/splash/logo_w2.png")
         self.logobutton.bind(on_release=self._load_program,
                             #  on_press=click_sfx
                              )
