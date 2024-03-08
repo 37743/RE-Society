@@ -48,13 +48,19 @@ class Login(Screen, FloatLayout):
             u, p= str(self.user_box.text), str(self.pass_box.text)
             cr.execute(f"SELECT verify_login(\'{u}\',\'{p}\') AS verify_login")
             if cr.fetchall()[0][0] == 1:
-                self.login_result.text=f"Welcome, {u}!"
                 app.user = u
                 app.home = home.Home(name="Home Page")
                 app.screen_manager.add_widget(app.home)
                 Clock.schedule_once(lambda dt: change_to_screen(screen="Home Page"), 2)
+                self.login_results.text = "Success! Logging in.."
+                self.login_results.color = "green"
+            else:
+                self.login_results.color = "red"
+                self.login_results.text = "Invalid Credentials!"
             cn.close()
         except mysql.connector.Error as e:
+            self.login_results.color = "red"
+            self.login_results.text = "Server is offline."
             print(f"{e}")
 
     def __init__(self, **kwargs):
@@ -140,9 +146,16 @@ class Login(Screen, FloatLayout):
                                 background_normal=
                                 "app/assets/login/login_btn.png",
                                 background_down=
-                                "app/assets/login/login_btn.png")
+                                "app/assets/login/login_btn_down.png")
         self.login_button.bind(on_release=self._login_released)
         self.add_widget(self.login_button)
+        self.login_results = Label(text="",
+                                font_name="Antonio",
+                                color='red',
+                                font_size=13,
+                                halign='center',
+                                pos_hint={'center_x': .5, 'center_y': .24})
+        self.add_widget(self.login_results)
         #endregion
         self.footer = Label(text="RE:Society is a comprehensive application aimed at reintegrating ex-convicts into society by providing them with job opportunities and mentorship.",
                              color = "707070",
